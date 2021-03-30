@@ -40,3 +40,29 @@ exports.getOnePost = (request, response) => {
 			return response.status(500).json({ error: err.code});
 		});
 };
+
+exports.createOnePost = (request, response) => {
+	cors(request, response, () => {
+		if (request.body.message.trim() === '') {
+			return response.status(400).json({ message: 'Must not be empty' });
+		}
+			
+		const newPost = {
+			title: request.body.title,
+			body: request.body.body,
+			createdAt: new Date().toISOString()
+		}
+		db
+			.collection('posts')
+			.add(newPost)
+			.then((doc)=>{
+				const responsePost = newPost;
+				responsePost.id = doc.id;
+				return response.json(responsePost);
+			})
+			.catch((err) => {
+				response.status(500).json({ error: 'Something went wrong' });
+				console.error(err);
+			});
+	})
+}
