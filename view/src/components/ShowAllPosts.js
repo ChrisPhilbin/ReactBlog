@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Container from '@material-ui/core/Container'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -45,7 +46,7 @@ const ShowAllPosts = () => {
                 <Container maxWidth="lg">
                     {posts.map((post) => (
                         <Paper className={classes.postPaper} elevation={3}>
-                            <Typography variant="h3" gutterBottom>{post.title}</Typography>
+                            <Typography variant="h3" gutterBottom><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
                             {post.body}
                         </Paper>
                     ))}
