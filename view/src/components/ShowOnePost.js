@@ -59,6 +59,7 @@ const ShowOnePost = (props) => {
             .then(response => {
                 if (response.status === 200) {
                     alert("Deleted!")
+                    props.history.push('/posts')
                 }
             })
         }

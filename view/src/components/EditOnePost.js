@@ -18,8 +18,6 @@ const EditOnePost = (props) => {
         })
     },[])
 
-    console.log(post, "post")
-
     const handlePostUpdate = () => {
         let updatedPost = {
             title: post.title,
