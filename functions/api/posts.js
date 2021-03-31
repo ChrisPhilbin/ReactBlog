@@ -87,3 +87,17 @@ exports.editOnePost = (request, response) => {
         });
     });
 }
+
+exports.deleteOneReply = (request, response) => {
+	db
+		.collection('posts')
+		.doc(request.body.postId)
+		.delete()
+		.then((doc) => {
+			return response.status(200).json(request.body.postId)
+		})
+		.catch((error) => {
+			response.status(500).json({ error: 'something went wrong' })
+			console.log(error)
+		})
+}

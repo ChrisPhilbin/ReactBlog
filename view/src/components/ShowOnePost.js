@@ -44,7 +44,23 @@ const ShowOnePost = (props) => {
 
     const handleDelete = () => {
         if (window.confirm("Are you sure?")) {
-            alert("Deleted!")
+
+            let deletedPost = {
+                postId: props.match.params.postId
+            }
+
+            fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`, {
+                method: 'delete',
+                body: JSON.stringify(deletedPost),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Deleted!")
+                }
+            })
         }
     }
 
