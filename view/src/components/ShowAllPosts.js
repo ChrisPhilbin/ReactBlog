@@ -45,7 +45,7 @@ const ShowAllPosts = () => {
             <div className={classes.root}>
                 <Container maxWidth="lg">
                     {posts.map((post) => (
-                        <Paper className={classes.postPaper} elevation={3}>
+                        <Paper key={post.postId} className={classes.postPaper} elevation={3}>
                             <Typography variant="h3" gutterBottom><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
                             {post.body}
                         </Paper>

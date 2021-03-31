@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react'
 
 import Container from '@material-ui/core/Container'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import IconButton from '@material-ui/core/IconButton'
+import EditIcon from '@material-ui/icons/Edit'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
+    postIcons: {
+        position: 'relative',
+        float: 'right',
+        right: 0,
+        top: 0
+    },
     root: {
       width: '100%',
       maxWidth: 1000,
     },
     postPaper: {
+        position: 'relative',
         padding: 10,
         margin: 10
     }
@@ -32,6 +42,12 @@ const ShowOnePost = (props) => {
         })
     },[])
 
+    const handleDelete = () => {
+        if (window.confirm("Are you sure?")) {
+            alert("Deleted!")
+        }
+    }
+
     if (loading) {
         return(
             <div>
@@ -43,6 +59,23 @@ const ShowOnePost = (props) => {
             <div className={classes.root}>
                 <Container maxWidth="lg">
                     <Paper className={classes.postPaper} elevation={3}>
+                        <div className={classes.postIcons}>
+                            <IconButton
+                                color="primary"
+                                aria-label="Add a new reply"
+                                href={`/posts/${props.match.params.postId}/edit`}
+                            >
+                                <EditIcon style={{ fontSize: 30 }} />
+                            </IconButton>
+
+                            <IconButton
+                                color="secondary"
+                                aria-label="Add a new reply"
+                                onClick={handleDelete}
+                            >
+                                <DeleteForeverIcon style={{ fontSize: 30 }} />
+                            </IconButton>
+                        </div>
                         <Typography variant="h3" gutterBottom>{post.title}<br /></Typography>
                         {post.body}
                     </Paper>
