@@ -7,16 +7,12 @@ import TextField from '@material-ui/core/TextField'
 const EditOnePost = (props) => {
 
     let [loading, setLoading] = useState(true)
-    let [title, setTitle]     = useState('')
-    let [body, setBody]       = useState('')
     let [post, setPost]       = useState({})
 
     useEffect(() => {
         fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
         .then(response => response.json())
         .then(data =>{
-            // setTitle(data.title)
-            // setBody(data.body)
             setPost(data)
             setLoading(false)
         })
@@ -26,9 +22,26 @@ const EditOnePost = (props) => {
 
     const handlePostUpdate = () => {
         let updatedPost = {
-            title: title,
-            body: body
+            title: post.title,
+            body: post.body
         }
+        fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedPost),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.status === 200) {
+                alert("Post updated!")
+                props.history.push('/posts')
+            } else {
+                alert("Something went wrong!")
+            }
+        })
+        .catch(error => console.log(error, "something went wrong"))
+
     }
 
     if (loading) {

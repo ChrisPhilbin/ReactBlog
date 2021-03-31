@@ -66,3 +66,24 @@ exports.createOnePost = (request, response) => {
 			});
 	})
 }
+
+exports.editOnePost = (request, response) => {
+	console.log(request.body, "request body")
+	if (request.body.body.trim() === '' || request.body.title.trim() === '') {
+		return response.status(403).json({ message: 'Must not be empty' });
+	}
+	if(request.body.postId || request.body.createdAt){
+        response.status(403).json({message: 'Not allowed to edit'});
+    }
+	let document = db.collection('posts').doc(`${request.params.postId}`);
+    document.update(request.body)
+    .then(()=> {
+        response.status(200).json({post: 'Updated successfully'});
+    })
+    .catch((err) => {
+        console.error(err);
+        return response.status(500).json({ 
+                error: err.code 
+        });
+    });
+}
