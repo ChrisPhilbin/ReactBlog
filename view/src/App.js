@@ -7,6 +7,7 @@ import CreateNewPost from './components/CreateNewPost'
 import ShowOnePost from './components/ShowOnePost'
 import EditOnePost from './components/EditOnePost'
 import SideBar from './navigation/SideBar'
+import Footer from './navigation/Footer'
 
 const App = () => {
   return(
@@ -21,6 +22,7 @@ const App = () => {
             <Route exact path="/posts/:postId/edit" component={EditOnePost} />
             <SideBar />
           </Switch>
+        <Footer />
       </div>
     </Router>
   )
