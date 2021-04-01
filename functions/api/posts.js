@@ -58,7 +58,7 @@ exports.createOnePost = (request, response) => {
 			.then((doc)=>{
 				const responsePost = newPost;
 				responsePost.id = doc.id;
-				return response.json(responsePost);
+				return response.status(200).json(responsePost);
 			})
 			.catch((err) => {
 				response.status(500).json({ error: 'Something went wrong' });
