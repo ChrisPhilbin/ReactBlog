@@ -8,8 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
     root: {
-      width: '100%',
-      maxWidth: 1000,
+      width: '75%',
     },
     postPaper: {
         padding: 10,

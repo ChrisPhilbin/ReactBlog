@@ -6,8 +6,11 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
+        backgroundColor: 'lightGray',
+        color: 'black',
         top: 'auto',
-        bottom: 0
+        bottom: 0,
+        zIndex: 1000
     }
 }))
 
@@ -16,7 +19,7 @@ const Footer = () => {
     const classes = useStyles() 
 
     return(
-        <AppBar position="fixed" color="primary" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
                 Footer text here
             </Toolbar>
