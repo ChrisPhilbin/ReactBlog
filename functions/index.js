@@ -6,12 +6,14 @@ const {
     deleteOneReply,
     editOnePost,
     getAllPosts,
-    getOnePost
+    getOnePost,
+    getLatestPosts
 } = require('./api/posts')
 
 app.post('/posts', createOnePost);
 app.get('/posts', getAllPosts);
+app.get('/posts/latest', getLatestPosts);
 app.get('/posts/:postId', getOnePost);
-app.put('/posts/:postId', editOnePost)
-app.delete('/posts/:postId', deleteOneReply)
+app.put('/posts/:postId', editOnePost);
+app.delete('/posts/:postId', deleteOneReply);
 exports.api = functions.https.onRequest(app);

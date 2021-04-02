@@ -99,3 +99,27 @@ exports.deleteOneReply = (request, response) => {
 			console.log(error)
 		})
 }
+
+exports.getLatestPosts = (request, response) => {
+	db
+		.collection('posts')
+		.orderBy('createdAt', 'desc')
+		.limit(5)
+		.get()
+		.then((data) => {
+			let posts = [];
+			data.forEach((doc) => {
+				posts.push({
+                    postId: doc.id,
+                    title: doc.data().title,
+					body: doc.data().body,
+					createdAt: doc.data().createdAt,
+				});
+			});
+			return response.json(posts);
+		})
+		.catch((err) => {
+			console.error(err);
+			return response.status(500).json({ error: err.code});
+		});
+};
