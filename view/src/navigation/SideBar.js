@@ -5,6 +5,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
+import LatestPosts from '../components/LatestPosts'
 
 const drawerWidth = 450;
 
@@ -36,7 +37,7 @@ const SideBar = () => {
         >
 
         <Divider />
-
+        
         <List>
             {['Posts', 'Categories', 'Login'].map((text) => (
                 <ListItem button key={text}>
@@ -46,14 +47,8 @@ const SideBar = () => {
         </List>
 
         <Divider />
-        
-        <List>
-            {['Posts', 'Categories', 'Login'].map((text) => (
-                <ListItem button key={text}>
-                    <ListItemText primary={text} />
-                </ListItem>
-            ))}
-        </List>
+
+        <LatestPosts />
 
         </Drawer>
     )
