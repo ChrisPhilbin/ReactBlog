@@ -15,7 +15,7 @@ const App = () => {
       <div>
         <SideBar />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Posts} />
             <Route exact path="/posts" component={Posts} />
             <Route exact path="/posts/new" component={CreateNewPost} />
             <Route exact path="/posts/:postId" component={ShowOnePost} />

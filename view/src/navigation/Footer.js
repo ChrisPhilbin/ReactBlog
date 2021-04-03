@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 
 import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -10,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         top: 'auto',
         bottom: 0,
-        zIndex: 1000
+        zIndex: 1000,
+        textAlign: 'center'
     }
 }))
 
@@ -21,7 +23,9 @@ const Footer = () => {
     return(
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
-                Footer text here
+                <Typography align="center">
+                    Footer text here
+                </Typography>
             </Toolbar>
 
         </AppBar>

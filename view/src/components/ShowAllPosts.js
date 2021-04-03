@@ -13,6 +13,9 @@ const useStyles = makeStyles({
     postPaper: {
         padding: 10,
         margin: 10
+    },
+    spacer: {
+        height: 100,
     }
 })
 
@@ -50,6 +53,7 @@ const ShowAllPosts = () => {
                         </Paper>
                     ))}
                 </Container>
+                <div className={classes.spacer} />
             </div>
         )
     }
