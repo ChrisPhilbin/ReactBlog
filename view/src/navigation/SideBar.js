@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import LatestPosts from '../components/LatestPosts'
+import MainLinks from '../components/MainLinks'
 
 const drawerWidth = 450;
 
@@ -38,13 +39,7 @@ const SideBar = () => {
 
         <Divider />
         
-        <List>
-            {['Posts', 'Categories', 'Login'].map((text) => (
-                <ListItem button key={text}>
-                    <ListItemText primary={text} />
-                </ListItem>
-            ))}
-        </List>
+        <MainLinks />
 
         <Divider />
 

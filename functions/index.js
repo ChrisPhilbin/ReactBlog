@@ -17,3 +17,9 @@ app.get('/posts/:postId', getOnePost);
 app.put('/posts/:postId', editOnePost);
 app.delete('/posts/:postId', deleteOneReply);
 exports.api = functions.https.onRequest(app);
+
+const {
+    getAllCategories
+} = require('./api/categories')
+
+app.get('/categories', getAllCategories);
