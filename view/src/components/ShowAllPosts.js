@@ -12,7 +12,8 @@ const useStyles = makeStyles({
     },
     postPaper: {
         padding: 10,
-        margin: 10
+        margin: 10,
+        fontFamily: 'arial'
     },
     spacer: {
         height: 100,
