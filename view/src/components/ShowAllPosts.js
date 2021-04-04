@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
@@ -16,7 +16,14 @@ const useStyles = makeStyles({
     },
     spacer: {
         height: 100,
-    }
+    },
+    uiProgess: {
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        padding: 10,
+        margin: 10
+	}
 })
 
 const ShowAllPosts = () => {
@@ -38,9 +45,9 @@ const ShowAllPosts = () => {
 
     if (loading && !posts.length) {
         return(
-            <>
-                Loading posts...
-            </>
+            <div className={classes.root}>
+                <CircularProgress size={150} className={classes.uiProgess} />
+            </div>
         )
     } else {
         return(
