@@ -21,3 +21,25 @@ exports.getAllCategories = (request, response) => {
 			return response.status(500).json({ error: err.code});
 		});
 };
+
+exports.createOneCategory = (request, response) => {
+	if (request.body.name.trim() === '') {
+		return response.status(400).json({ message: 'Name field cannot be empty!' });
+	}
+	const newCategory = {
+		name: request.body.name,
+		createdAt: new Date().toISOString()
+	}
+	db
+		.collection('categories')
+		.add(newCategory)
+		.then((doc)=>{
+			const responseCategory = newCategory;
+			responseCategory.id = doc.id;
+			return response.status(200).json(responseCategory);
+		})
+		.catch((err) => {
+			response.status(500).json({ error: 'Something went wrong' });
+			console.error(err);
+		});
+}

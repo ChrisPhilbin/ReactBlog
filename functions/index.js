@@ -19,7 +19,9 @@ app.delete('/posts/:postId', deleteOneReply);
 exports.api = functions.https.onRequest(app);
 
 const {
+    createOneCategory,
     getAllCategories
 } = require('./api/categories')
 
 app.get('/categories', getAllCategories);
+app.post('/categories', createOneCategory);
