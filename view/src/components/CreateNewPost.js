@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -25,6 +30,7 @@ const CreateNewPost = (props) => {
     let [category, setCategory]                   = useState('')
     let [categories, setCategories]               = useState([])
     let [categoriesLoading, setCategoriesLoading] = useState(true)
+    let [dialogOpen, setDialogOpen]               = useState(false)
 
     useEffect(() => {
         fetch(process.env.REACT_APP_CORS + '/categories')
@@ -60,44 +66,70 @@ const CreateNewPost = (props) => {
 
     if (!categoriesLoading && categories.length) {
         return (
-            <Container maxWidth="md">
-                <Paper elevation={3} className={classes.postPaper}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <TextField fullWidth label="Post Title" onChange={(e) => setPost({...post, title: e.target.value})} />
+            <>
+                <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Add a new category</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Add the name of the new category below
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Category name"
+                            fullWidth
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setDialogOpen(false)} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={() => setDialogOpen(false)} color="primary">
+                            Save
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Container maxWidth="md">
+                    <Paper elevation={3} className={classes.postPaper}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <TextField fullWidth label="Post Title" onChange={(e) => setPost({...post, title: e.target.value})} />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <InputLabel id="category-select-label">Category</InputLabel>
+
+                                <Select
+                                    displayEmpty
+                                    labelId="category-select-label"
+                                    id="category-select"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                >
+                                    <MenuItem value="" disabled>
+                                        Select category
+                                    </MenuItem>
+                                    {categories.map((category) => (
+                                        <MenuItem value={category.name} key={category.categoryId}>{category.name}</MenuItem>
+                                    ))}
+                                </Select>
+
+                                <Button onClick={() => setDialogOpen(true)}>New category</Button>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField fullWidth multiline rows={16} label="Post Body" onChange={(e) => setPost({...post, body: e.target.value})} />
+                            </Grid>
+
+                            <Grid item xs={6}>
+                                <Button variant="contained" color="primary" onClick={handlePostSubmit}>Create Post</Button>
+                            </Grid>
                         </Grid>
-
-                        <Grid item xs={12}>
-                            <InputLabel id="category-select-label">Category</InputLabel>
-
-                            <Select
-                                displayEmpty
-                                labelId="category-select-label"
-                                id="category-select"
-                                value={category}
-                                onChange={(e) => setCategory(e.target.value)}
-                            >
-                                <MenuItem value="" disabled>
-                                    Select category
-                                </MenuItem>
-                                {categories.map((category) => (
-                                    <MenuItem value={category.name} key={category.categoryId}>{category.name}</MenuItem>
-                                ))}
-                            </Select>
-
-                            <Button>New category</Button>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField fullWidth multiline rows={16} label="Post Body" onChange={(e) => setPost({...post, body: e.target.value})} />
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <Button variant="contained" color="primary" onClick={handlePostSubmit}>Create Post</Button>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </Container>
+                    </Paper>
+                </Container>
+            </>
         )
     } else {
         return(
