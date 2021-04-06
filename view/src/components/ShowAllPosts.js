@@ -57,6 +57,8 @@ const ShowAllPosts = () => {
                     {posts.map((post) => (
                         <Paper key={post.postId} className={classes.postPaper} elevation={3}>
                             <Typography variant="h3" gutterBottom><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
+                            {post.category ? <em>Posted in {post.category}<br /><br /></em> : null }
+                            <em></em>
                             {post.body}
                         </Paper>
                     ))}

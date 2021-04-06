@@ -47,7 +47,8 @@ const CreateNewPost = (props) => {
     const handlePostSubmit = () => {
         let newPost = {
             title: post.title,
-            body:  post.body
+            body:  post.body,
+            category: category
         }
         fetch(process.env.REACT_APP_CORS + '/posts', {
             method: 'post',

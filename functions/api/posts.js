@@ -11,6 +11,7 @@ exports.getAllPosts = (request, response) => {
 				posts.push({
                     postId: doc.id,
                     title: doc.data().title,
+					category: doc.data().category,
 					body: doc.data().body,
 					createdAt: doc.data().createdAt,
 				});
@@ -49,6 +50,7 @@ exports.createOnePost = (request, response) => {
 	const newPost = {
 		title: request.body.title,
 		body: request.body.body,
+		category: request.body.category,
 		createdAt: new Date().toISOString()
 	}
 	db
