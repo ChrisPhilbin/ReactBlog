@@ -25,3 +25,9 @@ const {
 
 app.get('/categories', getAllCategories);
 app.post('/categories', createOneCategory);
+
+const {
+    getOneStaticPage
+} = require('./api/static')
+
+app.get('/static/:pageName', getOneStaticPage)
