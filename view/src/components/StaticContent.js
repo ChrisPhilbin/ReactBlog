@@ -15,9 +15,9 @@ const StaticContent = (props) => {
     console.log(pageContent, "page content")
     return(
         <>
-        {pageContent.title}
+            {pageContent.title}
 
-        {pageContent.body}
+            {pageContent.body}
         </>
     )
 }
