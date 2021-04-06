@@ -28,6 +28,7 @@ const CreateNewPost = (props) => {
 
     let [post, setPost]                           = useState({})
     let [category, setCategory]                   = useState('')
+    let [addedCategory, setAddedCategory]         = useState('')
     let [categories, setCategories]               = useState([])
     let [categoriesLoading, setCategoriesLoading] = useState(true)
     let [dialogOpen, setDialogOpen]               = useState(false)
@@ -66,7 +67,7 @@ const CreateNewPost = (props) => {
 
     const handleCategorySubmit = () => {
         let newCategory = {
-            name: category
+            name: addedCategory
         }
         fetch(process.env.REACT_APP_CORS + '/categories', {
             method: 'post',
@@ -75,12 +76,15 @@ const CreateNewPost = (props) => {
                 'Content-Type':'application/json'
             }
         })
-        .then(response => {
-            if (response.status === 200) {
-                alert("Category created")
-                setCategories([...categories, category])
-                setDialogOpen(false)
-            }
+        .then(response => response.json())
+        .then(data => {
+            alert("New category created!")
+            setCategories([...categories, data])
+            setDialogOpen(false)
+        })
+        .catch(error => {
+            console.log(error, "something went wrong")
+            alert("Something went wrong, please try again!")
         })
     }
 
@@ -98,7 +102,7 @@ const CreateNewPost = (props) => {
                             margin="dense"
                             id="name"
                             label="Category name"
-                            onChange={(e) => setCategory(e.target.value)}
+                            onChange={(e) => setAddedCategory(e.target.value)}
                             fullWidth
                         />
                     </DialogContent>
