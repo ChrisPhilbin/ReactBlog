@@ -25,9 +25,16 @@ const MainLinks = () => {
             <List>
                 <Link to="/posts/">
                     <ListItem button>
-                        <ListItemText primary="Posts"/>
+                        <ListItemText primary="Home"/>
                     </ListItem>
                 </Link>
+
+                <Link to="/posts/new">
+                    <ListItem button>
+                        <ListItemText primary="New post"/>
+                    </ListItem>
+                </Link>
+
             </List>
         </div>
     )
