@@ -22,7 +22,7 @@ exports.createOneStaticPage = (request, response) => {
 		return response.status(400).json({ message: 'Name or body fields cannot be empty!' });
 	}
 	const newStaticPage = {
-		title: request.body.name,
+		title: request.body.title,
 		body: request.body.body,
 		createdAt: new Date().toISOString()
 	}
