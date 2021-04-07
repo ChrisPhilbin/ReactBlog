@@ -2,14 +2,12 @@ const { db } = require('../util/admin');
 
 exports.getOneStaticPage = (request, response) => {
 	db
-		.collection('static')
-		.where('title', '==', request.params.pageName)
-		.get()
+		.doc(`/static/${request.params.pageName}`).get()
 		.then((doc) => {
-            if (!doc.exists) {
-                return response.status(404).json()
-            }
-            staticPageData = doc.data();
+			if (!doc.exists) {
+				return response.status(404).json()
+			}
+			staticPageData = doc.data();
 			staticPageData.pageId = doc.id;
 			return response.json(staticPageData);
 		})
@@ -29,8 +27,8 @@ exports.createOneStaticPage = (request, response) => {
 		createdAt: new Date().toISOString()
 	}
 	db
-		.collection('static')
-		.add(newStaticPage)
+		.doc(`/static/${newStaticPage.title}`)
+		.set(newStaticPage)
 		.then((doc)=>{
 			const responseStaticPage = newStaticPage;
 			responseStaticPage.id = doc.id;
