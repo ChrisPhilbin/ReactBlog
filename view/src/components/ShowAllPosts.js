@@ -44,6 +44,15 @@ const ShowAllPosts = () => {
         .catch(error => console.log(error, "something went wrong"))
     },[])
 
+    const formatPost = (post) => {
+        let shortenedPost = post.body.substring(0,350)
+        return(
+            <div>
+            {shortenedPost} <Link to={`/posts/${post.postId}`}> ...Read more</Link>
+            </div>
+        )
+    } 
+
     if (loading && !posts.length) {
         return(
             <div className={classes.root}>
@@ -59,7 +68,7 @@ const ShowAllPosts = () => {
                             <Typography variant="h3" gutterBottom><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
                             {post.category ? <em>Posted in {post.category}<br /><br /></em> : null }
                             <em></em>
-                            {post.body}
+                            {post.body.length >= 350 ? formatPost(post) : post.body}
                         </Paper>
                     ))}
                 </Container>
