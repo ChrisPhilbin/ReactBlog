@@ -8,15 +8,18 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
     root: {
-      width: '75%',
+      width: '75%'
     },
     postPaper: {
         padding: 10,
-        margin: 10,
+        marginBottom: 45,
         fontFamily: 'arial'
     },
     spacer: {
         height: 100,
+    },
+    toolbarSpacer: {
+        height: 40
     },
     uiProgess: {
         display: 'block',
@@ -29,7 +32,9 @@ const useStyles = makeStyles({
 
 const ShowAllPosts = () => {
 
-    const classes = useStyles();
+    const classes = useStyles()
+
+    const maxLength = 350
 
     let [posts, setPosts]     = useState([])
     let [loading, setLoading] = useState(true)
@@ -45,7 +50,7 @@ const ShowAllPosts = () => {
     },[])
 
     const formatPost = (post) => {
-        let shortenedPost = post.body.substring(0,350)
+        let shortenedPost = post.body.substring(0,maxLength)
         return(
             <div>
             {shortenedPost} <Link to={`/posts/${post.postId}`}> ...Read more</Link>
@@ -62,13 +67,14 @@ const ShowAllPosts = () => {
     } else {
         return(
             <div className={classes.root}>
+                <div className={classes.toolbarSpacer} />
                 <Container maxWidth="lg">
                     {posts.map((post) => (
                         <Paper key={post.postId} className={classes.postPaper} elevation={3}>
                             <Typography variant="h3" gutterBottom><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
                             {post.category ? <em>Posted in {post.category}<br /><br /></em> : null }
                             <em></em>
-                            {post.body.length >= 350 ? formatPost(post) : post.body}
+                            {post.body.length >= maxLength ? formatPost(post) : post.body}
                         </Paper>
                     ))}
                 </Container>

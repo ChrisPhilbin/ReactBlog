@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        backgroundColor: 'lightGray',
+        backgroundColor: 'Azure',
         color: 'black',
         top: 'auto',
         bottom: 0,
@@ -21,7 +21,7 @@ const Footer = () => {
     const classes = useStyles() 
 
     return(
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar position="relative" className={classes.appBar}>
             <Toolbar>
                 <Typography align="center">
                     Footer text here

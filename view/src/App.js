@@ -8,14 +8,16 @@ import ShowOnePost from './components/ShowOnePost'
 import EditOnePost from './components/EditOnePost'
 import SideBar from './navigation/SideBar'
 import Footer from './navigation/Footer'
-import StaticContent from './components/StaticContent';
-import CreateStaticPage from './components/CreateStaticPage';
+import StaticContent from './components/StaticContent'
+import CreateStaticPage from './components/CreateStaticPage'
+import TopBar from './navigation/TopBar'
 
 const App = () => {
   return(
     <Router>
       <div>
         <SideBar />
+          <TopBar />
           <Switch>
             <Route exact path="/" component={Posts} />
             <Route exact path="/posts" component={Posts} />
