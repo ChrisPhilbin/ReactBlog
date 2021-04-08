@@ -34,7 +34,6 @@ exports.createOneCategory = (request, response) => {
 		.collection('categories')
 		.add(newCategory)
 		.then((doc)=>{
-			console.log(doc, "doc after creation")
 			const responseCategory = newCategory;
 			responseCategory.id = doc.id;
 			return response.status(200).json(responseCategory);

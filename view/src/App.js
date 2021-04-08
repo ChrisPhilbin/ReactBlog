@@ -9,6 +9,7 @@ import EditOnePost from './components/EditOnePost'
 import SideBar from './navigation/SideBar'
 import Footer from './navigation/Footer'
 import StaticContent from './components/StaticContent';
+import CreateStaticPage from './components/CreateStaticPage';
 
 const App = () => {
   return(
@@ -21,6 +22,7 @@ const App = () => {
             <Route exact path="/posts/new" component={CreateNewPost} />
             <Route exact path="/posts/:postId" component={ShowOnePost} />
             <Route exact path="/posts/:postId/edit" component={EditOnePost} />
+            <Route exact path="/static/new" component={CreateStaticPage} />
             <Route exact path="/static/:page" render={(props) => (<StaticContent {...props} />
   )}
 />

@@ -29,9 +29,21 @@ const MainLinks = () => {
                     </ListItem>
                 </Link>
 
+                <Link to="/static/about">
+                    <ListItem button>
+                        <ListItemText primary="About" />
+                    </ListItem>
+                </Link>
+
                 <Link to="/posts/new">
                     <ListItem button>
                         <ListItemText primary="New post"/>
+                    </ListItem>
+                </Link>
+
+                <Link to="/static/new">
+                    <ListItem button>
+                        <ListItemText primary="New Static Page"/>
                     </ListItem>
                 </Link>
 
