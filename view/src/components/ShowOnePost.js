@@ -40,7 +40,7 @@ const ShowOnePost = (props) => {
             setPost(data)
             setLoading(false)
         })
-    },[])
+    })
 
     const handleDelete = () => {
         if (window.confirm("Are you sure?")) {

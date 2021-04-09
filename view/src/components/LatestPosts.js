@@ -33,7 +33,7 @@ const LatestPosts = () => {
 
     let [recentPosts, setRecentPosts] = useState([])
     let [loading, setLoading]         = useState(true)
-    let [error, setError]             = useState('')
+    let [error, setError]             = useState(false)
 
     useEffect(() => {
         fetch(process.env.REACT_APP_CORS + '/posts/latest')
@@ -42,10 +42,11 @@ const LatestPosts = () => {
             setRecentPosts(data)
             setLoading(false)
         })
-        .catch(error => setError(error))
+        .catch(error => {
+            setError(true)
+            console.log(error, "something went wrong")
+        })
     },[])
-
-    console.log(recentPosts, "recent posts")
 
     if (loading) {
         return(
@@ -53,13 +54,17 @@ const LatestPosts = () => {
                 {loading && <CircularProgress size={150} className={classes.uiProgess} />}
             </div>
         )
+    } else if (error) {
+            <div>
+                Error, something went wrong!
+            </div>
     } else {
         return(
             <div className={classes.recentPosts}>
             <Typography variant="h4" gutterBottom>Latest Posts</Typography>
                 <List>
                     {recentPosts.map((post) => (
-                        <Link to={"/posts/" + post.postId} className={classes.postLink}>
+                        <Link to={"/posts/" + post.postId} className={classes.postLink} key={post.postId}>
                             <ListItem button key={post.postId}>
                                 <ListItemText primary={post.title}/>
                             </ListItem>

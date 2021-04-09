@@ -1,7 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import Home from './pages/Home'
 import Posts from './components/ShowAllPosts'
 import CreateNewPost from './components/CreateNewPost'
 import ShowOnePost from './components/ShowOnePost'
@@ -28,7 +26,7 @@ const App = () => {
             <Route exact path="/static/new" component={CreateStaticPage} />
             <Route exact path="/static/:page" component={StaticContent} />
             <Route exact path="/categories/:categoryName" component={ShowAllCategoryPosts} />
-            
+
             <SideBar />
           </Switch>
         <Footer />

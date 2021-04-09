@@ -18,14 +18,28 @@ const ShowAllCategoryPosts = (props) => {
                 setErrors(true)
             }
         })
-    }, [])
+    })
 
     console.log(posts, "posts from category")
-    return(
-        <>
-        Showing all posts within category
-        </>
-    )
+    if (loading) {
+        return (
+            <>
+            Loading...
+            </>
+        )
+    } else if (errors) {
+        return(
+            <>
+            Error, something went wrong
+            </>
+        )
+    } else {
+        return(
+            <>
+            Showing all posts within category
+            </>
+        )
+    }
 }
 
 export default ShowAllCategoryPosts
