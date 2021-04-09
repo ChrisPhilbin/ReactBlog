@@ -11,6 +11,7 @@ import Footer from './navigation/Footer'
 import StaticContent from './components/StaticContent'
 import CreateStaticPage from './components/CreateStaticPage'
 import TopBar from './navigation/TopBar'
+import ShowAllCategoryPosts from './components/category/ShowAllCategoryPosts';
 
 const App = () => {
   return(
@@ -25,9 +26,9 @@ const App = () => {
             <Route exact path="/posts/:postId" component={ShowOnePost} />
             <Route exact path="/posts/:postId/edit" component={EditOnePost} />
             <Route exact path="/static/new" component={CreateStaticPage} />
-            <Route exact path="/static/:page" render={(props) => (<StaticContent {...props} />
-  )}
-/>
+            <Route exact path="/static/:page" component={StaticContent} />
+            <Route exact path="/categories/:categoryName" component={ShowAllCategoryPosts} />
+            
             <SideBar />
           </Switch>
         <Footer />
