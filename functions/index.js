@@ -20,11 +20,13 @@ exports.api = functions.https.onRequest(app);
 
 const {
     createOneCategory,
-    getAllCategories
+    getAllCategories,
+    getAllPostsInCategory
 } = require('./api/categories')
 
 app.get('/categories', getAllCategories);
 app.post('/categories', createOneCategory);
+app.get('/categories/:categoryName', getAllPostsInCategory)
 
 const {
     createOneStaticPage,

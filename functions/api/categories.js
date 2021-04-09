@@ -43,3 +43,32 @@ exports.createOneCategory = (request, response) => {
 			console.error(err);
 		});
 }
+
+exports.getAllPostsInCategory = (request, response) => {
+	db
+		.collection('posts')
+		.where('category', '==', request.params.categoryName )
+		.orderBy('createdAt', 'desc')
+		.get()
+		.then((data) => {
+			let posts = [];
+			data.forEach((doc) => {
+				posts.push({
+                    postId: doc.id,
+					title: doc.data().title,
+                    body: doc.data().body,
+					category: doc.data().category,
+					createdAt: doc.data().createdAt,
+				});
+			});
+			if (posts.length === 0) {
+				return response.status(404).json({'error':'no posts found'})
+			} else {
+				return response.status(200).json(posts)
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+			return response.status(500).json({ error: err.code});
+		});
+};
