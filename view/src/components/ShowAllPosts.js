@@ -3,6 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
+import moment from 'moment'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
@@ -15,8 +16,14 @@ const useStyles = makeStyles({
         marginBottom: 45,
         fontFamily: 'arial'
     },
+    postTitle: {
+        fontWeight: 'bold'
+    },
     spacer: {
         height: 100,
+    },
+    subTitle: {
+        fontWeight: 'bold'
     },
     toolbarSpacer: {
         height: 40
@@ -71,9 +78,8 @@ const ShowAllPosts = () => {
                 <Container maxWidth="lg">
                     {posts.map((post) => (
                         <Paper key={post.postId} className={classes.postPaper} elevation={3}>
-                            <Typography variant="h3" gutterBottom><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
-                            {post.category ? <em>Posted in {post.category}<br /><br /></em> : null }
-                            <em></em>
+                            <Typography variant="h5" gutterBottom className={classes.postTitle}><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
+                            {post.category ? <span className={classes.subTitle}><em>Posted in {post.category} - {moment(post.createdAt).format('LL')}<br /><br /></em></span> : null }
                             {post.body.length >= maxLength ? formatPost(post) : post.body}
                         </Paper>
                     ))}

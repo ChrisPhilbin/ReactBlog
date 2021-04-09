@@ -30,7 +30,7 @@ const TopBar = () => {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" className={classes.title}>
+          <Typography variant="h4" className={classes.title}>
             Chris' Blog
           </Typography>
           <Button color="inherit">Login</Button>
