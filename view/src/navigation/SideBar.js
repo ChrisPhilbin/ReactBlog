@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'Azure',
         width: drawerWidth,
     },
+    topSpacer: {
+        height: 60
+    }
 }))
 
 const SideBar = () => {
@@ -34,14 +37,15 @@ const SideBar = () => {
             }}
             anchor="right"
         >
+            <div className={classes.topSpacer} />
 
-        <Divider />
-        
-        <MainLinks />
+            <Divider />
+            
+            <MainLinks />
 
-        <Divider />
+            <Divider />
 
-        <LatestPosts />
+            <LatestPosts />
 
         </Drawer>
     )

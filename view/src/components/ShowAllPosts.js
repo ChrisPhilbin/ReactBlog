@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import moment from 'moment'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import useFormatPost from '../hooks/useFormatPosts'
 
 const useStyles = makeStyles({
     root: {
@@ -43,6 +44,8 @@ const ShowAllPosts = () => {
 
     const maxLength = 350
 
+    const formatPost = useFormatPost()
+
     let [posts, setPosts]     = useState([])
     let [loading, setLoading] = useState(true)
 
@@ -55,15 +58,6 @@ const ShowAllPosts = () => {
         })
         .catch(error => console.log(error, "something went wrong"))
     },[])
-
-    const formatPost = (post) => {
-        let shortenedPost = post.body.substring(0,maxLength)
-        return(
-            <div>
-            {shortenedPost} <Link to={`/posts/${post.postId}`}> ...Read more</Link>
-            </div>
-        )
-    } 
 
     if (loading && !posts.length) {
         return(

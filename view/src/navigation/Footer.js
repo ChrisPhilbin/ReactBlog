@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         color: 'black',
         top: 'auto',
         bottom: 0,
-        zIndex: 1000,
+        zIndex: 1400,
         textAlign: 'center'
     }
 })
