@@ -6,25 +6,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import moment from 'moment'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import useFormatPost from '../hooks/useFormatPosts'
+import DisplayPost from './DisplayPost'
 
 const useStyles = makeStyles({
     root: {
       width: '75%'
     },
-    postPaper: {
-        padding: 10,
-        marginBottom: 45,
-        fontFamily: 'arial'
-    },
-    postTitle: {
-        fontWeight: 'bold'
-    },
     spacer: {
         height: 100,
-    },
-    subTitle: {
-        fontWeight: 'bold'
     },
     toolbarSpacer: {
         height: 40
@@ -41,10 +30,6 @@ const useStyles = makeStyles({
 const ShowAllPosts = () => {
 
     const classes = useStyles()
-
-    const maxLength = 350
-
-    const formatPost = useFormatPost()
 
     let [posts, setPosts]     = useState([])
     let [loading, setLoading] = useState(true)
@@ -71,11 +56,7 @@ const ShowAllPosts = () => {
                 <div className={classes.toolbarSpacer} />
                 <Container maxWidth="lg">
                     {posts.map((post) => (
-                        <Paper key={post.postId} className={classes.postPaper} elevation={3}>
-                            <Typography variant="h5" gutterBottom className={classes.postTitle}><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
-                            {post.category ? <span className={classes.subTitle}><em>Posted in {post.category} - {moment(post.createdAt).format('LL')}<br /><br /></em></span> : null }
-                            {post.body.length >= maxLength ? formatPost(post) : post.body}
-                        </Paper>
+                        <DisplayPost post={post} />
                     ))}
                 </Container>
                 <div className={classes.spacer} />
