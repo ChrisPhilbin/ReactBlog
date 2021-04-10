@@ -4,6 +4,7 @@ import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import LatestPosts from '../components/LatestPosts'
 import MainLinks from '../components/MainLinks'
+import CategoryLinks from '../components/CategoryLinks'
 
 const drawerWidth = 450;
 
@@ -46,6 +47,10 @@ const SideBar = () => {
             <Divider />
 
             <LatestPosts />
+
+            <Divider />
+
+            <CategoryLinks />
 
         </Drawer>
     )
