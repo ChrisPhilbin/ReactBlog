@@ -35,11 +35,11 @@ const MainLinks = (props) => {
                     </ListItem>
                 </Link>
 
-
-                    <ListItem button onClick={() => props.setRender('newPost')}>
+                <Link to="/posts/new">
+                    <ListItem button>
                         <ListItemText primary="New post"/>
                     </ListItem>
-
+                </Link>
 
                 <Link to="/static/new">
                     <ListItem button>
