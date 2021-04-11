@@ -10,6 +10,7 @@ import StaticContent from './components/StaticContent'
 import CreateStaticPage from './components/CreateStaticPage'
 import TopBar from './navigation/TopBar'
 import ShowAllCategoryPosts from './components/category/ShowAllCategoryPosts';
+import Home from './components/Home'
 
 const App = () => {
   return(
@@ -26,7 +27,7 @@ const App = () => {
             <Route exact path="/static/new" component={CreateStaticPage} />
             <Route exact path="/static/:page" component={StaticContent} />
             <Route exact path="/categories/:categoryName" component={ShowAllCategoryPosts} />
-
+            <Route exact path="/test" component={Home} />
             <SideBar />
           </Switch>
         <Footer />

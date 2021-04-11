@@ -40,7 +40,7 @@ const ShowAllCategoryPosts = (props) => {
         .catch(error => console.log(error, "something went wrong"))
     },[])
 
-    if (loading && !posts.length) {
+    if (loading) {
         return(
             <div className={classes.root}>
                 <CircularProgress size={150} className={classes.uiProgess} />
