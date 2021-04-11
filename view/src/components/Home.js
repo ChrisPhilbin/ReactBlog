@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/styles'
 
 import SideBar from '../navigation/SideBar'
 import ShowAllPosts from '../components/ShowAllPosts'
+import CreateNewPost from './CreateNewPost'
 
 const useStyles = makeStyles({
     root: {
@@ -25,18 +26,25 @@ const useStyles = makeStyles({
 const Home = () => {
     const classes = useStyles()
 
+    let [render, setRender] = useState('showAllPosts')
+
     return(
         <div className={classes.root}>
             <Grid container>
                 <Grid item xs={12} md={3} lg={3}>
                     <Paper className={classes.paper} elevation={0}>
-                        <SideBar />
+                        <SideBar setRender={setRender}/>
                     </Paper>
                 </Grid>
 
                 <Grid item xs={12} md={9} lg={9}>
                     <Paper className={classes.paper} elevation={0}>
-                        <ShowAllPosts />
+                    {
+						{
+							'newPost': <CreateNewPost />,
+							'showAllPosts': <ShowAllPosts />
+						}[render] || <ShowAllPosts />
+					}
                     </Paper>
                 </Grid>
             </Grid>

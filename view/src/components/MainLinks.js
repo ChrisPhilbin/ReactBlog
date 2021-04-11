@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     },
 })
 
-const MainLinks = () => {
+const MainLinks = (props) => {
 
     const classes = useStyles()
 
@@ -35,11 +35,11 @@ const MainLinks = () => {
                     </ListItem>
                 </Link>
 
-                <Link to="/posts/new">
-                    <ListItem button>
+
+                    <ListItem button onClick={() => props.setRender('newPost')}>
                         <ListItemText primary="New post"/>
                     </ListItem>
-                </Link>
+
 
                 <Link to="/static/new">
                     <ListItem button>

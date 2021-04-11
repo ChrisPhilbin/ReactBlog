@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const SideBar = () => {
+const SideBar = (props) => {
 
     const classes = useStyles()
 
@@ -36,7 +36,7 @@ const SideBar = () => {
 
             <Divider />
             
-            <MainLinks />
+            <MainLinks setRender={props.setRender}/>
 
             <Divider />
 
