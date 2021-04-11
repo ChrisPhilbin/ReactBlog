@@ -30,14 +30,8 @@ const SideBar = () => {
     const classes = useStyles()
 
     return(
-        <Drawer
-            className={classes.drawer}
-            variant="permanent"
-            classes={{
-            paper: classes.drawerPaper,
-            }}
-            anchor="right"
-        >
+        <>
+
             <div className={classes.topSpacer} />
 
             <Divider />
@@ -52,7 +46,7 @@ const SideBar = () => {
 
             <CategoryLinks />
 
-        </Drawer>
+        </>
     )
 }
 

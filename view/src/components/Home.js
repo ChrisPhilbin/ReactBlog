@@ -4,34 +4,43 @@ import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(() => ({
+import SideBar from '../navigation/SideBar'
+import ShowAllPosts from '../components/ShowAllPosts'
+
+const useStyles = makeStyles({
+    root: {
+        flexGrow: 1
+    },
     container: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(12, 1fr)',
-      gridGap: 3
+      gridGap: 1
     },
     paper: {
       padding: 1,
-      textAlign: 'center',
       color: 'secondary',
-      whiteSpace: 'nowrap',
       marginBottom: 1
     }
-  }));
+  })
 
 const Home = () => {
     const classes = useStyles()
 
     return(
-        <Grid container spacing={3}>
-            <Grid item xs={4}>
-                <Paper className={classes.paper}>Navigation</Paper>
-            </Grid>
+        <div className={classes.root}>
+            <Grid container>
+                <Grid item xs={12} md={3} lg={3}>
+                    <Paper className={classes.paper} elevation={0}>
+                        <SideBar />
+                    </Paper>
+                </Grid>
 
-            <Grid item xs={8}>
-                <Paper className={classes.paper}>Main content</Paper>
+                <Grid item xs={12} md={9} lg={9}>
+                    <Paper className={classes.paper} elevation={0}>
+                        <ShowAllPosts />
+                    </Paper>
+                </Grid>
             </Grid>
-        </Grid>
+        </div>
     )
 }
 

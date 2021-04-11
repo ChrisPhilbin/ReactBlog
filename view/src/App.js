@@ -11,12 +11,10 @@ import CreateStaticPage from './components/CreateStaticPage'
 import TopBar from './navigation/TopBar'
 import ShowAllCategoryPosts from './components/category/ShowAllCategoryPosts';
 import Home from './components/Home'
-
 const App = () => {
   return(
     <Router>
       <div>
-        <SideBar />
           <TopBar />
           <Switch>
             <Route exact path="/" component={Posts} />
@@ -28,7 +26,6 @@ const App = () => {
             <Route exact path="/static/:page" component={StaticContent} />
             <Route exact path="/categories/:categoryName" component={ShowAllCategoryPosts} />
             <Route exact path="/test" component={Home} />
-            <SideBar />
           </Switch>
         <Footer />
       </div>

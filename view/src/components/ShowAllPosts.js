@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import moment from 'moment'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import DisplayPost from './DisplayPost'
 
 const useStyles = makeStyles({
     root: {
-      width: '75%'
+      width: '90%'
     },
     spacer: {
         height: 100,
