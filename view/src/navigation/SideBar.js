@@ -32,8 +32,6 @@ const SideBar = () => {
     return(
         <>
 
-            <div className={classes.topSpacer} />
-
             <Divider />
             
             <MainLinks />

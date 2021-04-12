@@ -3,6 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import DisplayPost from '../DisplayPost'
+import ShowLoading from '../ShowLoading'
 
 const useStyles = makeStyles({
     root: {
@@ -32,22 +33,32 @@ const ShowAllCategoryPosts = (props) => {
 
     useEffect(() => {
         fetch(process.env.REACT_APP_CORS + `/categories/${props.match.params.categoryName}`)
-        .then(response => response.json())
-        .then(data => {
-            setPosts(data)
-            setLoading(false)
+        .then(response => {
+            if (response.status) {
+                response.json()
+                .then(data => {
+                    setPosts(data)
+                    setLoading(false)
+                })
+            }
         })
         .catch(error => console.log(error, "something went wrong"))
     },[])
 
     if (loading) {
         return(
-            <div className={classes.root}>
-                <CircularProgress size={150} className={classes.uiProgess} />
-            </div>
+            <ShowLoading />
         )
     } else {
-        return(
+        if (posts.length === undefined) {
+            return(
+        
+                <div>There are no posts yet in this category</div>
+            )           
+        } else {
+
+            {console.log(posts, "posts")}
+        
             <div className={classes.root}>
                 <div className={classes.toolbarSpacer} />
                 <Container maxWidth="lg">
@@ -57,7 +68,7 @@ const ShowAllCategoryPosts = (props) => {
                 </Container>
                 <div className={classes.spacer} />
             </div>
-        )
+        }
     }
 }
 

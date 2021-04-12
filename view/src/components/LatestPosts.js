@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import ShowLoading from './ShowLoading'
 
 const useStyles = makeStyles({
     root: {
@@ -50,9 +51,7 @@ const LatestPosts = () => {
 
     if (loading) {
         return(
-            <div className={classes.root}>
-                {loading && <CircularProgress size={150} className={classes.uiProgess} />}
-            </div>
+            <ShowLoading />
         )
     } else if (error) {
             <div>

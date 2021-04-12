@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import ShowLoading from './ShowLoading'
 
 const useStyles = makeStyles({
     root: {
@@ -50,9 +51,7 @@ const CategoryLinks = () => {
 
     if (loading) {
         return(
-            <div className={classes.root}>
-                {loading && <CircularProgress size={150} className={classes.uiProgess} />}
-            </div>
+            <ShowLoading />
         )
     } else if (error) {
             <div>

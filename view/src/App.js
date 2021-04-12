@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     gridGap: 1
   },
   paper: {
-    padding: 1,
+    padding: 8,
     color: 'secondary',
     marginBottom: 1
   }
