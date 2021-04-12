@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import ShowLoading from './ShowLoading'
 
 const useStyles = makeStyles({
     postIcons: {
@@ -16,8 +17,7 @@ const useStyles = makeStyles({
         top: 0
     },
     root: {
-      width: '100%',
-      maxWidth: 1000,
+      width: '90%',
     },
     postPaper: {
         position: 'relative',
@@ -39,6 +39,7 @@ const ShowOnePost = (props) => {
         .then(data => {
             setPost(data)
             setLoading(false)
+            document.title = post.title
         })
     })
 
@@ -67,9 +68,7 @@ const ShowOnePost = (props) => {
 
     if (loading) {
         return(
-            <div>
-                Loading post...
-            </div>
+            <ShowLoading />
         )
     } else {
         return(
