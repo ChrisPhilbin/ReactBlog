@@ -4,6 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,6 +15,16 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  ["@media (min-width: 1024px)"]: {
+    menuButton: {
+        display: 'none'
+    }
+  },
+  ["@media (max-width: 1024px)"]: {
+    loginButton: {
+        display: 'none'
+    }
   },
   title: {
     flexGrow: 1,
@@ -27,10 +39,13 @@ const TopBar = () => {
     <div className={classes.root}>
       <AppBar position="relative">
         <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h4" className={classes.title}>
             React Blog
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" className={classes.loginButton}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
