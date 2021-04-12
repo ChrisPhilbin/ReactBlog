@@ -6,23 +6,13 @@ import LatestPosts from '../components/LatestPosts'
 import MainLinks from '../components/MainLinks'
 import CategoryLinks from '../components/CategoryLinks'
 
-const drawerWidth = 450;
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    drawerPaper: {
-        backgroundColor: 'Azure',
-        width: drawerWidth,
-    },
-    topSpacer: {
-        height: 60
+const useStyles = makeStyles(() => ({
+    ["@media (max-width: 1024px)"]: {
+        sideBar: {
+            display: 'none'
+        }
     }
+
 }))
 
 const SideBar = () => {
@@ -30,7 +20,7 @@ const SideBar = () => {
     const classes = useStyles()
 
     return(
-        <>
+        <div className={classes.sideBar}>
 
             <Divider />
             
@@ -44,7 +34,7 @@ const SideBar = () => {
 
             <CategoryLinks />
 
-        </>
+        </div>
     )
 }
 
