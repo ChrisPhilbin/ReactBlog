@@ -13,14 +13,7 @@ const useStyles = makeStyles({
     },
     toolbarSpacer: {
         height: 40
-    },
-    uiProgess: {
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        padding: 10,
-        margin: 10
-	}
+    }
 })
 
 const ShowAllCategoryPosts = (props) => {
@@ -51,8 +44,9 @@ const ShowAllCategoryPosts = (props) => {
     } else {
         if (posts.length === undefined) {
             return(
-        
-                <div>There are no posts yet in this category</div>
+                <div>
+                    There are no posts yet in this category
+                </div>
             )           
         } else {
 
