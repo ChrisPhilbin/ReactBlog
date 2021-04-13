@@ -11,6 +11,7 @@ const useStyles = makeStyles({
         width: '100%',
         textAlign: 'center',
         paddingTop: 75,
+        paddingBottom: 30,
         position: 'static'
     }
 })
@@ -22,7 +23,7 @@ const Footer = () => {
     return(
         <div className={classes.root}>
             <Typography>
-                Footer text
+                &copy; {new Date().getFullYear()} Chris Philbin
             </Typography>
         </div>
     )

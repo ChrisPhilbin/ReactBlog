@@ -7,12 +7,14 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
     postPaper: {
-        padding: 10,
+        padding: 20,
         marginBottom: 45,
         fontFamily: 'arial'
     },
     postTitle: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        
     },
     subTitle: {
         fontWeight: 'bold'
@@ -37,8 +39,8 @@ const DisplayPost = (props) => {
     }
 
     return(
-        <Paper key={post.postId} className={classes.postPaper} elevation={3}>
-            <Typography variant="h5" gutterBottom className={classes.postTitle}><Link to={"/posts/" + post.postId}>{post.title}</Link></Typography>
+        <Paper key={post.postId} className={classes.postPaper} elevation={8}>
+            <Typography variant="h5" gutterBottom className={classes.postTitle}><Link to={"/posts/" + post.postId} style={{textDecoration: 'none', color: 'dodgerBlue'}}>{post.title}</Link></Typography>
             {post.category ? <span className={classes.subTitle}><em>Posted in {post.category} - {moment(post.createdAt).format('LL')}<br /><br /></em></span> : null }
             {post.body.length >= maxLength ? formatPost(post) : post.body}
         </Paper>

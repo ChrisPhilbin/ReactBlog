@@ -7,12 +7,14 @@ import MainLinks from '../components/MainLinks'
 import CategoryLinks from '../components/CategoryLinks'
 
 const useStyles = makeStyles(() => ({
+    sideBar: {
+        borderRight: '1px solid lightGray'
+    },
     ["@media (max-width: 1024px)"]: {
         sideBar: {
-            display: 'none'
+            display: 'none',
         }
     }
-
 }))
 
 const SideBar = () => {
