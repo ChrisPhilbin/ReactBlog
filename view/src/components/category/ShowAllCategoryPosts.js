@@ -57,17 +57,17 @@ const ShowAllCategoryPosts = (props) => {
             )           
         } else {
 
-            {console.log(posts, "posts")}
-        
-            <div className={classes.root}>
-                <div className={classes.toolbarSpacer} />
-                <Container maxWidth="lg">
-                    {posts.map((post) => (
-                        <DisplayPost post={post} />
-                    ))}
-                </Container>
-                <div className={classes.spacer} />
-            </div>
+            return(
+                <div className={classes.root}>
+                    <div className={classes.toolbarSpacer} />
+                    <Container maxWidth="lg">
+                        {posts.map((post) => (
+                            <DisplayPost post={post} />
+                        ))}
+                    </Container>
+                    <div className={classes.spacer} />
+                </div>
+            )
         }
     }
 }
