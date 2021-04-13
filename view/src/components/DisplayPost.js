@@ -41,7 +41,7 @@ const DisplayPost = (props) => {
     return(
         <Paper key={post.postId} className={classes.postPaper} elevation={8}>
             <Typography variant="h5" gutterBottom className={classes.postTitle}><Link to={"/posts/" + post.postId} style={{textDecoration: 'none', color: 'dodgerBlue'}}>{post.title}</Link></Typography>
-            {post.category ? <span className={classes.subTitle}><em>Posted in {post.category} - {moment(post.createdAt).format('LL')}<br /><br /></em></span> : null }
+            {post.category ? <span className={classes.subTitle}><em>Posted in <Link to={"/categories/" + post.category}>{post.category}</Link> - {moment(post.createdAt).format('LL')}<br /><br /></em></span> : null }
             {post.body.length >= maxLength ? formatPost(post) : post.body}
         </Paper>
     )
