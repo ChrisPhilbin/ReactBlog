@@ -14,6 +14,7 @@ import Home from './components/Home'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/styles'
+import LogIn from './components/LogIn';
 
 const useStyles = makeStyles({
   root: {
@@ -48,6 +49,7 @@ const App = () => {
             <Paper className={classes.paper} elevation={0}>
               <Switch>
                 <Route exact path="/" component={Posts} />
+                <Route exact path="/login" component={LogIn} />
                 <Route exact path="/posts" component={Posts} />
                 <Route exact path="/posts/new" component={CreateNewPost} />
                 <Route exact path="/posts/:postId" component={ShowOnePost} />

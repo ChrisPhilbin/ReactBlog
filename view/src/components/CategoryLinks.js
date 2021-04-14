@@ -46,7 +46,7 @@ const CategoryLinks = () => {
             console.log(error)
             setError(true)
         })
-    })
+    },[])
 
     if (loading) {
         return(
