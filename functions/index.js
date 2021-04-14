@@ -35,3 +35,11 @@ const {
 
 app.get('/static/:pageName', getOneStaticPage)
 app.post('/static', createOneStaticPage)
+
+const {
+    loginUser,
+    getUserDetail
+} = require('./api/users')
+
+app.post('/login', loginUser)
+app.get('/user', getUserDetail)
