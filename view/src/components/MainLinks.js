@@ -4,6 +4,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
+import { useCheckToken } from '../hooks/customHooks'
 
 import Typography from '@material-ui/core/Typography'
 
@@ -17,6 +18,8 @@ const useStyles = makeStyles({
 const MainLinks = (props) => {
 
     const classes = useStyles()
+
+    const isLoggedIn = useCheckToken()
 
     return(
         <div className={classes.mainLinks}>
@@ -35,18 +38,23 @@ const MainLinks = (props) => {
                     </ListItem>
                 </Link>
 
-                <Link to="/posts/new">
-                    <ListItem button>
-                        <ListItemText primary="New post"/>
-                    </ListItem>
-                </Link>
+                {isLoggedIn ?
+                    <>
+                        <Link to="/posts/new">
+                            <ListItem button>
+                                <ListItemText primary="New post"/>
+                            </ListItem>
+                        </Link>
 
-                <Link to="/static/new">
-                    <ListItem button>
-                        <ListItemText primary="New Static Page"/>
-                    </ListItem>
-                </Link>
-
+                        <Link to="/static/new">
+                            <ListItem button>
+                                <ListItemText primary="New Static Page"/>
+                            </ListItem>
+                        </Link>
+                    </>
+                    :
+                    null
+                }
             </List>
         </div>
     )

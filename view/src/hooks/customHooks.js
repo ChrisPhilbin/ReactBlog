@@ -4,3 +4,8 @@ export const useIsLoggedIn = (history) => {
         history.push('/login')
     }
 }
+
+export const useCheckToken = () => {
+    const authToken = localStorage.getItem('AuthToken');
+    return authToken ? true : false
+}
