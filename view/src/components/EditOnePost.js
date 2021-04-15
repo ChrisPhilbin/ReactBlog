@@ -16,7 +16,7 @@ const EditOnePost = (props) => {
             setPost(data)
             setLoading(false)
         })
-    })
+    },[])
 
     const handlePostUpdate = () => {
         let updatedPost = {
