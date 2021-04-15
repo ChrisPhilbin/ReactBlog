@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import ShowLoading from './ShowLoading'
+import { useCheckToken } from '../hooks/customHooks'
 
 const useStyles = makeStyles({
     postIcons: {
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
 const ShowOnePost = (props) => {
 
     const classes = useStyles()
+
+    const isLoggedIn = useCheckToken()
 
     let [post, setPost] = useState({})
     let [loading, setLoading] = useState(true)
@@ -75,23 +78,27 @@ const ShowOnePost = (props) => {
             <div className={classes.root}>
                 <Container maxWidth="lg">
                     <Paper className={classes.postPaper} elevation={3}>
-                        <div className={classes.postIcons}>
-                            <IconButton
-                                color="primary"
-                                aria-label="Add a new reply"
-                                href={`/posts/${props.match.params.postId}/edit`}
-                            >
-                                <EditIcon style={{ fontSize: 30 }} />
-                            </IconButton>
+                        { isLoggedIn ? 
+                            <div className={classes.postIcons}>
+                                <IconButton
+                                    color="primary"
+                                    aria-label="Add a new reply"
+                                    href={`/posts/${props.match.params.postId}/edit`}
+                                >
+                                    <EditIcon style={{ fontSize: 30 }} />
+                                </IconButton>
 
-                            <IconButton
-                                color="secondary"
-                                aria-label="Add a new reply"
-                                onClick={handleDelete}
-                            >
-                                <DeleteForeverIcon style={{ fontSize: 30 }} />
-                            </IconButton>
-                        </div>
+                                <IconButton
+                                    color="secondary"
+                                    aria-label="Add a new reply"
+                                    onClick={handleDelete}
+                                >
+                                    <DeleteForeverIcon style={{ fontSize: 30 }} />
+                                </IconButton>
+                            </div>
+                        :
+                            null
+                        }
                         <Typography variant="h3" gutterBottom>{post.title}<br /></Typography>
                         {post.body}
                     </Paper>
