@@ -121,13 +121,6 @@ const LogIn = (props) => {
                         Sign In
                         {loading && <CircularProgress size={30} className={classes.progess} />}
                     </Button>
-                    <Grid container>
-                        <Grid item>
-                            <Link href="signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
                     {errors.general && (
                         <Typography variant="body2" className={classes.customError}>
                             {errors.general}
