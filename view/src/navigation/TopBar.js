@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
   ["@media (min-width: 1024px)"]: {
     menuButton: {
         display: 'none'
+    },
+    loginButton: {
+      color: 'white',
+      textDecoration: 'none'    
     }
   },
   ["@media (max-width: 1024px)"]: {
@@ -70,7 +75,9 @@ const TopBar = () => {
           <Typography variant="h4" className={classes.title}>
             React Blog
           </Typography>
-          <Button color="inherit" className={classes.loginButton}>Login</Button>
+          <Link to="/login" className={classes.loginButton}>
+            <Button color="inherit">Login</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

@@ -13,6 +13,7 @@ import Select from '@material-ui/core/Select'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core'
+import { useGetTokenFromLocalStorage } from '../hooks/customHooks'
 
 const useStyles = makeStyles({
     postPaper: {
@@ -25,6 +26,8 @@ const useStyles = makeStyles({
 const CreateNewPost = (props) => {
 
     const classes = useStyles()
+
+    const token = useGetTokenFromLocalStorage()
 
     let [post, setPost]                           = useState({})
     let [category, setCategory]                   = useState('')
