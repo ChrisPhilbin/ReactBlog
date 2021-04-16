@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const app = require('express')();
+const auth = require('./util/auth');
 
 const {
     createOnePost,
@@ -10,12 +11,12 @@ const {
     getLatestPosts
 } = require('./api/posts')
 
-app.post('/posts', createOnePost);
+app.post('/posts', auth, createOnePost);
 app.get('/posts', getAllPosts);
 app.get('/posts/latest', getLatestPosts);
 app.get('/posts/:postId', getOnePost);
-app.put('/posts/:postId', editOnePost);
-app.delete('/posts/:postId', deleteOneReply);
+app.put('/posts/:postId', auth, editOnePost);
+app.delete('/posts/:postId', auth, deleteOneReply);
 exports.api = functions.https.onRequest(app);
 
 const {
@@ -25,7 +26,7 @@ const {
 } = require('./api/categories')
 
 app.get('/categories', getAllCategories);
-app.post('/categories', createOneCategory);
+app.post('/categories', auth, createOneCategory);
 app.get('/categories/:categoryName', getAllPostsInCategory)
 
 const {
@@ -34,7 +35,7 @@ const {
 } = require('./api/static')
 
 app.get('/static/:pageName', getOneStaticPage)
-app.post('/static', createOneStaticPage)
+app.post('/static', auth, createOneStaticPage)
 
 const {
     loginUser,
@@ -42,4 +43,4 @@ const {
 } = require('./api/users')
 
 app.post('/login', loginUser)
-app.get('/user', getUserDetail)
+app.get('/user', auth, getUserDetail)

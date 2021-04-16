@@ -73,12 +73,12 @@ exports.editOnePost = (request, response) => {
 		return response.status(403).json({ message: 'Must not be empty' });
 	}
 	if(request.body.postId || request.body.createdAt){
-        response.status(403).json({message: 'Not allowed to edit'});
+        return response.status(403).json({message: 'Not allowed to edit'});
     }
 	let document = db.collection('posts').doc(`${request.params.postId}`);
     document.update(request.body)
     .then(()=> {
-        response.status(200).json({post: 'Updated successfully'});
+        return response.status(200).json({post: 'Updated successfully'});
     })
     .catch((err) => {
         console.error(err);
