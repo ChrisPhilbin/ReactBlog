@@ -3,11 +3,15 @@ import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
-import { useIsLoggedIn } from '../hooks/customHooks'
+import ShowLoading from './ShowLoading'
+import { useGetTokenFromLocalStorage, useIsLoggedIn } from '../hooks/customHooks'
+import { Typography } from '@material-ui/core'
 
 const EditOnePost = (props) => {
 
     useIsLoggedIn(props.history)
+
+    const token = useGetTokenFromLocalStorage()
 
     let [loading, setLoading] = useState(true)
     let [post, setPost]       = useState({})
@@ -30,7 +34,8 @@ const EditOnePost = (props) => {
             method: 'PUT',
             body: JSON.stringify(updatedPost),
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'authorization':token
             }
         })
         .then(response => {
@@ -47,13 +52,12 @@ const EditOnePost = (props) => {
 
     if (loading) {
         return(
-            <div>
-                Edit one post
-            </div>
+            <ShowLoading />
         )
     } else {
         return(
             <Container>
+            <Typography variant="h4" gutterBottom>Edit Post</Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <TextField fullWidth label="Post Title" defaultValue={post.title} onChange={(e) => setPost({...post, title: e.target.value})}/>
