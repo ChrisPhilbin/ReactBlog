@@ -60,7 +60,7 @@ const LogIn = (props) => {
             .then((response) => {
                 localStorage.setItem('AuthToken', `Bearer ${response.data.token}`);
                 setLoading(false)		
-                props.history.push('/');
+                window.location.reload()
             })
             .catch((error) => {		
                 setErrors(error.response.data)		
