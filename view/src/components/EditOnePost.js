@@ -3,8 +3,11 @@ import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import { useIsLoggedIn } from '../hooks/customHooks'
 
 const EditOnePost = (props) => {
+
+    useIsLoggedIn(props.history)
 
     let [loading, setLoading] = useState(true)
     let [post, setPost]       = useState({})

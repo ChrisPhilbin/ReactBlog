@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
+import { useGetTokenFromLocalStorage } from '../hooks/customHooks'
 
 const useStyles = makeStyles({
     postPaper: {
@@ -16,7 +17,9 @@ const useStyles = makeStyles({
 
 const CreateStaticPage = () => {
 
-    const classes = useStyles() 
+    const classes = useStyles()
+
+    const token = useGetTokenFromLocalStorage()
 
     let [title, setTitle] = useState('')
     let [body, setBody]   = useState('')
@@ -31,12 +34,15 @@ const CreateStaticPage = () => {
             method: 'post',
             body: JSON.stringify(newStaticPage),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'authorization':token
             }
         })
         .then(response => response.json())
         .then(data => {
             console.log(data, "data returned from new static page")
+            alert("Page created!")
+            window.location.reload()
         })
         .catch(error => console.log(error, "something went wrong"))
     }
