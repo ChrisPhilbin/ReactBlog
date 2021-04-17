@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom'
+import { useCheckToken } from '../hooks/customHooks'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,9 +39,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopBar = () => {
+const TopBar = (props) => {
 
   const classes = useStyles();
+
+  const isLoggedIn = useCheckToken()
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -51,6 +54,11 @@ const TopBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleSignout = () => {
+    localStorage.removeItem('AuthToken')
+    window.location.reload()
+  }
 
   return (
     <div className={classes.root}>
@@ -75,9 +83,13 @@ const TopBar = () => {
           <Typography variant="h4" className={classes.title}>
             React Blog
           </Typography>
-          <Link to="/login" className={classes.loginButton}>
-            <Button color="inherit">Login</Button>
-          </Link>
+          { isLoggedIn ?
+              <Button color="inherit" onClick={handleSignout}>Signout</Button>
+            :
+              <Link to="/login" className={classes.loginButton}>
+                <Button color="inherit">Login</Button>
+              </Link>
+          }
         </Toolbar>
       </AppBar>
     </div>
