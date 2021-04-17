@@ -13,8 +13,8 @@ const EditOnePost = (props) => {
 
     const token = useGetTokenFromLocalStorage()
 
-    let [loading, setLoading] = useState(true)
-    let [post, setPost]       = useState({})
+    let [loading, setLoading]       = useState(true)
+    let [post, setPost]             = useState({})
 
     useEffect(() => {
         fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
