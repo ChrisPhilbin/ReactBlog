@@ -57,7 +57,9 @@ const CreateNewPost = (props) => {
             method: 'post',
             body: JSON.stringify(newPost),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'authorization':token
+
             }
         })
         .then(response => {
@@ -77,7 +79,8 @@ const CreateNewPost = (props) => {
             method: 'post',
             body: JSON.stringify(newCategory),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'authorization':token
             }
         })
         .then(response => response.json())
