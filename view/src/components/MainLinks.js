@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -7,14 +7,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useCheckToken } from '../hooks/customHooks'
 import Typography from '@material-ui/core/Typography'
 
-// import firebase from 'firebase'
-// import admin from 'firebase-admin'
+// import firebase from 'firebase/app'
 // import environment from '../environment/environment'
+// import 'firebase/auth'
 
-// firebase.initializeApp(environment)
-
-// admin.auth().verifyIdToken(token)
-//   });
+firebase.initializeApp(environment)
 
 const useStyles = makeStyles({
     mainLinks: {
