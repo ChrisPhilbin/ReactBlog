@@ -5,8 +5,16 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 import { useCheckToken } from '../hooks/customHooks'
-
 import Typography from '@material-ui/core/Typography'
+
+// import firebase from 'firebase'
+// import admin from 'firebase-admin'
+// import environment from '../environment/environment'
+
+// firebase.initializeApp(environment)
+
+// admin.auth().verifyIdToken(token)
+//   });
 
 const useStyles = makeStyles({
     mainLinks: {

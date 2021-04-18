@@ -1,4 +1,6 @@
 config.js
+environment.js
+/environment
 
 # Logs
 logs
