@@ -7,12 +7,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useCheckToken } from '../hooks/customHooks'
 import Typography from '@material-ui/core/Typography'
 
-// import firebase from 'firebase/app'
-// import environment from '../environment/environment'
-// import 'firebase/auth'
-
-firebase.initializeApp(environment)
-
 const useStyles = makeStyles({
     mainLinks: {
         padding: 10,

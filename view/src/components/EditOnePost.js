@@ -9,12 +9,16 @@ import { Typography } from '@material-ui/core'
 
 const EditOnePost = (props) => {
 
+    console.log(props, "props")
+
     useIsLoggedIn(props.history)
 
     const token = useGetTokenFromLocalStorage()
 
     let [loading, setLoading]       = useState(true)
     let [post, setPost]             = useState({})
+    let [categories, setCategories] = useState([])
+    let [categoriesLoading, setCategoriesLoading] = useState(true)
 
     useEffect(() => {
         fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
@@ -24,6 +28,18 @@ const EditOnePost = (props) => {
             setLoading(false)
         })
     },[])
+
+    useEffect(() => {
+        fetch(process.env.REACT_APP_CORS + '/categories')
+        .then(response => response.json())
+        .then(data => {
+            setCategories(data)
+            setCategoriesLoading(false)
+        })
+        .catch(error => console.log(error, "Something went wrong fetching the categories"))
+    },[])
+
+    console.log(categories)
 
     const handlePostUpdate = () => {
         let updatedPost = {
@@ -50,7 +66,7 @@ const EditOnePost = (props) => {
 
     }
 
-    if (loading) {
+    if (loading || categoriesLoading) {
         return(
             <ShowLoading />
         )

@@ -51,9 +51,11 @@ const App = () => {
                 <Route exact path="/" component={Posts} />
                 <Route exact path="/login" component={LogIn} />
                 <Route exact path="/posts" component={Posts} />
-                <Route exact path="/posts/new" component={CreateNewPost} />
+                <Route exact path="/posts/new" render={(props) => <CreateNewPost {...props} edit={false} />} />
+                
                 <Route exact path="/posts/:postId" component={ShowOnePost} />
-                <Route exact path="/posts/:postId/edit" component={EditOnePost} />
+                <Route exact path="/posts/:postId/edit" render={(props) => <CreateNewPost {...props} edit={true} />} />
+
                 <Route exact path="/static/new" component={CreateStaticPage} />
                 <Route exact path="/static/:page" component={StaticContent} />
                 <Route exact path="/categories/:categoryName" component={ShowAllCategoryPosts} />

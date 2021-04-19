@@ -29,8 +29,10 @@ const CreateNewPost = (props) => {
 
     const token = useGetTokenFromLocalStorage()
 
+    const edit = props.edit 
+
     let [post, setPost]                           = useState({})
-    let [category, setCategory]                   = useState('')
+    let [method, setMethod]                       = useState('post')
     let [addedCategory, setAddedCategory]         = useState('')
     let [categories, setCategories]               = useState([])
     let [categoriesLoading, setCategoriesLoading] = useState(true)
@@ -41,20 +43,28 @@ const CreateNewPost = (props) => {
         .then(response => response.json())
         .then(data => {
             setCategories(data)
-            console.log(data, "showing categories returned from API")
             setCategoriesLoading(false)
         })
         .catch(error => console.log(error, "Something went wrong fetching the categories"))
     },[])
 
+    if (edit) {
+        fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
+        .then(response => response.json())
+        .then(data =>{
+            setPost(data)
+            setMethod("put")
+        })
+    }
+
     const handlePostSubmit = () => {
         let newPost = {
             title: post.title,
             body:  post.body,
-            category: category
+            category: post.category
         }
         fetch(process.env.REACT_APP_CORS + '/posts', {
-            method: 'post',
+            method: method,
             body: JSON.stringify(newPost),
             headers: {
                 'Content-Type':'application/json',
@@ -127,7 +137,7 @@ const CreateNewPost = (props) => {
                     <Paper elevation={3} className={classes.postPaper}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <TextField fullWidth label="Post Title" onChange={(e) => setPost({...post, title: e.target.value})} />
+                                <TextField fullWidth label="Post Title" value={post.title} onChange={(e) => setPost({...post, title: e.target.value})} />
                             </Grid>
 
                             <Grid item xs={12}>
@@ -137,8 +147,8 @@ const CreateNewPost = (props) => {
                                     displayEmpty
                                     labelId="category-select-label"
                                     id="category-select"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
+                                    value={post.category}
+                                    onChange={(e) => setPost({...post, category: e.target.value})}
                                 >
                                     <MenuItem value="" disabled>
                                         Select category
