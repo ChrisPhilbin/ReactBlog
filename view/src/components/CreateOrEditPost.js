@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
+import NativeSelect from '@material-ui/core/NativeSelect'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core'
@@ -109,6 +110,8 @@ const CreateNewPost = (props) => {
         })
     }
 
+    console.log(post, "post object")
+
     if (!categoriesLoading && categories.length) {
         return (
             <>
@@ -141,14 +144,14 @@ const CreateNewPost = (props) => {
                     <Paper elevation={3} className={classes.postPaper}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <TextField fullWidth label="Post Title" value={post.title} onChange={(e) => setPost({...post, title: e.target.value})} />
+                                <TextField fullWidth label="Post Title" value={post.title || ''} onChange={(e) => setPost({...post, title: e.target.value})} />
                             </Grid>
 
                             <Grid item xs={12}>
                                 <InputLabel id="category-select-label">Category</InputLabel>
 
                                 <Select
-                                    displayEmpty
+                                    
                                     labelId="category-select-label"
                                     id="category-select"
                                     value={post.category}
@@ -166,7 +169,7 @@ const CreateNewPost = (props) => {
                             </Grid>
 
                             <Grid item xs={12}>
-                                <TextField fullWidth multiline rows={16} label="Post Body" value={post.body} onChange={(e) => setPost({...post, body: e.target.value})} />
+                                <TextField fullWidth multiline rows={16} label="Post Body" value={post.body || ''} onChange={(e) => setPost({...post, body: e.target.value})} />
                             </Grid>
 
                             <Grid item xs={6}>
