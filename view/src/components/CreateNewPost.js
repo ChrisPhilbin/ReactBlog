@@ -33,6 +33,7 @@ const CreateNewPost = (props) => {
 
     let [post, setPost]                           = useState({})
     let [method, setMethod]                       = useState('post')
+    let [suffix, setSuffix]                       = useState('/posts')
     let [addedCategory, setAddedCategory]         = useState('')
     let [categories, setCategories]               = useState([])
     let [categoriesLoading, setCategoriesLoading] = useState(true)
@@ -55,6 +56,7 @@ const CreateNewPost = (props) => {
             .then(data =>{
                 setPost(data)
                 setMethod("put")
+                setSuffix(`/posts/${props.match.params.postId}`)
             })
         }
     },[])
@@ -65,7 +67,7 @@ const CreateNewPost = (props) => {
             body:  post.body,
             category: post.category
         }
-        fetch(process.env.REACT_APP_CORS + '/posts', {
+        fetch(process.env.REACT_APP_CORS + suffix, {
             method: method,
             body: JSON.stringify(newPost),
             headers: {
@@ -76,7 +78,7 @@ const CreateNewPost = (props) => {
         })
         .then(response => {
             if (response.status === 200) {
-                alert("Post created!")
+                alert("Post saved!")
                 props.history.push('/')
             }
         })
