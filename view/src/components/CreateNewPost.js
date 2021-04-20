@@ -48,14 +48,16 @@ const CreateNewPost = (props) => {
         .catch(error => console.log(error, "Something went wrong fetching the categories"))
     },[])
 
-    if (edit) {
-        fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
-        .then(response => response.json())
-        .then(data =>{
-            setPost(data)
-            setMethod("put")
-        })
-    }
+    useEffect(() => {
+        if (edit) {
+            fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
+            .then(response => response.json())
+            .then(data =>{
+                setPost(data)
+                setMethod("put")
+            })
+        }
+    },[])
 
     const handlePostSubmit = () => {
         let newPost = {
@@ -162,11 +164,11 @@ const CreateNewPost = (props) => {
                             </Grid>
 
                             <Grid item xs={12}>
-                                <TextField fullWidth multiline rows={16} label="Post Body" onChange={(e) => setPost({...post, body: e.target.value})} />
+                                <TextField fullWidth multiline rows={16} label="Post Body" value={post.body} onChange={(e) => setPost({...post, body: e.target.value})} />
                             </Grid>
 
                             <Grid item xs={6}>
-                                <Button variant="contained" color="primary" onClick={handlePostSubmit}>Create Post</Button>
+                                <Button variant="contained" color="primary" onClick={handlePostSubmit}>{edit ? "Save Changes" : "Create Post"}</Button>
                             </Grid>
                         </Grid>
                     </Paper>
