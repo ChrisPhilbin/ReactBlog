@@ -44,7 +44,7 @@ const ShowOnePost = (props) => {
             setLoading(false)
             document.title = post.title
         })
-    })
+    },[])
 
     const handleDelete = () => {
         if (window.confirm("Are you sure?")) {
