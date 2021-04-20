@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
-import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/styles'
 
 import SideBar from '../navigation/SideBar'
 import ShowAllPosts from '../components/ShowAllPosts'
-import CreateNewPost from './CreateNewPost'
+import CreateNewPost from './CreateOrEditPost'
 
 const useStyles = makeStyles({
     root: {

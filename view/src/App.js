@@ -1,9 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Posts from './components/ShowAllPosts'
-import CreateNewPost from './components/CreateNewPost'
+import CreateOrEditPost from './components/CreateOrEditPost'
 import ShowOnePost from './components/ShowOnePost'
-import EditOnePost from './components/EditOnePost'
 import SideBar from './navigation/SideBar'
 import Footer from './navigation/Footer'
 import StaticContent from './components/StaticContent'
@@ -51,10 +50,10 @@ const App = () => {
                 <Route exact path="/" component={Posts} />
                 <Route exact path="/login" component={LogIn} />
                 <Route exact path="/posts" component={Posts} />
-                <Route exact path="/posts/new" render={(props) => <CreateNewPost {...props} edit={false} />} />
+                <Route exact path="/posts/new" render={(props) => <CreateOrEditPost {...props} edit={false} />} />
                 
                 <Route exact path="/posts/:postId" component={ShowOnePost} />
-                <Route exact path="/posts/:postId/edit" render={(props) => <CreateNewPost {...props} edit={true} />} />
+                <Route exact path="/posts/:postId/edit" render={(props) => <CreateOrEditPost {...props} edit={true} />} />
 
                 <Route exact path="/static/new" component={CreateStaticPage} />
                 <Route exact path="/static/:page" component={StaticContent} />
