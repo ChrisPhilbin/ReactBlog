@@ -1,4 +1,4 @@
-const { db } = require('../util/admin');
+const { db, admin } = require('../util/admin');
 const config = require('../util/config');
 
 const firebase = require('firebase');
@@ -30,6 +30,28 @@ exports.loginUser = (request, response) => {
             return response.status(403).json({ general: 'wrong credentials, please try again'});
         })
 };
+
+exports.isUserSignedIn = (request, response) => {
+    console.log(request.body.idtoken, "***request***")
+    let idtoken;
+	if (request.body.idtoken && request.body.idtoken.startsWith('Bearer ')) {
+		idtoken = request.body.idtoken.split('Bearer ')[1];
+	} else {
+		console.error('No token found');
+		return response.status(403).json({ error: 'Unauthorized' });
+	}
+    admin
+    .auth()
+    .verifyIdToken(idtoken)
+    .then((decodedToken) => {
+        const uid = decodedToken.uid
+        return response.status(200).json({ uid })
+    })
+    .catch((error) => {
+        console.error(error)
+        return response.status(500).json({general: 'valid token not supplied'})
+    })
+}
 
 exports.signUpUser = (request, response) => {
     const newUser = {
