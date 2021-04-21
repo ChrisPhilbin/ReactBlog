@@ -1,9 +1,11 @@
 const { db } = require('../util/admin');
 
 exports.getAllPosts = (request, response) => {
+	let max = parseInt(request.query.limit) || 0
 	db
 		.collection('posts')
 		.orderBy('createdAt', 'desc')
+		.limit(max)
 		.get()
 		.then((data) => {
 			let posts = [];
