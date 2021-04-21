@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 import { useCheckToken } from '../hooks/customHooks'
 import Typography from '@material-ui/core/Typography'
+import { useIsUserSessionActive} from '../hooks/customHooks'
 
 const useStyles = makeStyles({
     mainLinks: {
@@ -19,6 +20,10 @@ const MainLinks = (props) => {
     const classes = useStyles()
 
     const isLoggedIn = useCheckToken()
+
+    const sessionActive = useIsUserSessionActive()
+
+    console.log(sessionActive, "session active?")
 
     return(
         <div className={classes.mainLinks}>
