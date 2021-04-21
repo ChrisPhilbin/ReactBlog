@@ -39,8 +39,10 @@ app.post('/static', auth, createOneStaticPage)
 
 const {
     loginUser,
-    getUserDetail
+    getUserDetail,
+    isUserSignedIn
 } = require('./api/users')
 
 app.post('/login', loginUser)
 app.get('/user', auth, getUserDetail)
+app.post('/user/auth', isUserSignedIn)
