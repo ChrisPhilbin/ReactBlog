@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/styles'
 import LogIn from './components/LogIn';
+import { firebase } from './environment/environment'
 
 const useStyles = makeStyles({
   root: {
@@ -27,6 +28,14 @@ const useStyles = makeStyles({
     padding: 8,
     color: 'secondary',
     marginBottom: 1
+  }
+})
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log('logged in')
+  } else {
+    console.log('logged out')
   }
 })
 
