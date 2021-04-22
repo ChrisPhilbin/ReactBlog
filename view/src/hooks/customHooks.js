@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react'
+
 export const useIsLoggedIn = (history) => {
     const authToken = localStorage.getItem('AuthToken');
     if(authToken === null){
@@ -16,23 +18,29 @@ export const useGetTokenFromLocalStorage = () => {
 }
 
 export const useIsUserSessionActive = () => {
-    let status
-    const authToken = localStorage.getItem('AuthToken')
-    if (!authToken) {
-        return false
-    }
-    fetch(process.env.REACT_APP_CORS + '/user/auth', {
-        method:'post',
-        body: JSON.stringify({idtoken: authToken}),
-        headers: {
-            'Content-Type':'application/json'
+    
+    let [status, setStatus] = useState(false)
+
+    useEffect(() => {
+        const authToken = localStorage.getItem('AuthToken')
+        if (!authToken) {
+            return false
         }
-    })
-    .then(response => {
-        if (response.status === 200) {
-            return status = true
-        } else { 
-            return status = false
-        }
-    })
+        fetch(process.env.REACT_APP_CORS + '/user/auth', {
+            method:'post',
+            body: JSON.stringify({idtoken: authToken}),
+            headers: {
+                'Content-Type':'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                setStatus(true)
+            } else {
+                setStatus(false)
+            }
+        })
+    },[])
+
+    return status
 }
