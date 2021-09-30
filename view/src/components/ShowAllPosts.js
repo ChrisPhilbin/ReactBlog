@@ -52,7 +52,7 @@ const ShowAllPosts = () => {
                 <div className={classes.toolbarSpacer} />
                 <Container maxWidth="lg">
                     {posts.map((post) => (
-                        <DisplayPost post={post} />
+                        <DisplayPost post={post} key={post.postId}/>
                     ))}
                 </Container>
                 <div className={classes.spacer} />

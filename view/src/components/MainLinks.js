@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -19,14 +19,12 @@ const MainLinks = (props) => {
 
     const classes = useStyles()
 
-    const isLoggedIn = useCheckToken()
-
-    const sessionActive = useIsUserSessionActive()
-
-    console.log(sessionActive, "session active?")
+    let isLoggedIn = useIsUserSessionActive()
+ 
 
     return(
         <div className={classes.mainLinks}>
+        {console.log(isLoggedIn, "value of isLoggedIn")}
         <Typography variant="h4" gutterBottom>Main Links</Typography>
             <List>
                 <Link to="/posts/">
