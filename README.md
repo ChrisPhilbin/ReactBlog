@@ -4,6 +4,8 @@ Blogging application using React/Redux for the front end, Material-UI for stylin
 
 Live demo: https://reactblog.chrisphilbin.net
 
+![Blog Home Page](https://raw.githubusercontent.com/ChrisPhilbin/blog/main/screenshots/react-blog.png)
+
 ## Roadmap
 
 See the [open issues](https://github.com/ChrisPhilbin/blog/issues) for a list of proposed features (and known issues).
