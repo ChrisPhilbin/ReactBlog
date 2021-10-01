@@ -1,42 +1,44 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import LatestPosts from '../components/LatestPosts'
-import MainLinks from '../components/MainLinks'
-import CategoryLinks from '../components/CategoryLinks'
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
+import LatestPosts from "../components/LatestPosts";
+import MainLinks from "../components/MainLinks";
+import CategoryLinks from "../components/CategoryLinks";
+import StaticPagesList from "../components/widgets/StaticPagesList";
 
 const useStyles = makeStyles(() => ({
+  sideBar: {
+    borderRight: "1px solid lightGray",
+  },
+  ["@media (max-width: 1024px)"]: {
     sideBar: {
-        borderRight: '1px solid lightGray'
+      display: "none",
     },
-    ["@media (max-width: 1024px)"]: {
-        sideBar: {
-            display: 'none',
-        }
-    }
-}))
+  },
+}));
 
 const SideBar = () => {
+  const classes = useStyles();
 
-    const classes = useStyles()
+  return (
+    <div className={classes.sideBar}>
+      <Divider />
 
-    return(
-        <div className={classes.sideBar}>
+      <MainLinks />
 
-            <Divider />
-            
-            <MainLinks />
+      <Divider />
 
-            <Divider />
+      <StaticPagesList />
 
-            <LatestPosts />
+      <Divider />
 
-            <Divider />
+      <LatestPosts />
 
-            <CategoryLinks />
+      <Divider />
 
-        </div>
-    )
-}
+      <CategoryLinks />
+    </div>
+  );
+};
 
-export default SideBar
+export default SideBar;

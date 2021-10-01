@@ -8,7 +8,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ShowLoading from "./ShowLoading";
-import { useCheckToken } from "../hooks/customHooks";
+import {
+  useCheckToken,
+  useGetTokenFromLocalStorage,
+} from "../hooks/customHooks";
 
 const useStyles = makeStyles({
   postIcons: {
@@ -31,6 +34,7 @@ const ShowOnePost = (props) => {
   const classes = useStyles();
 
   const isLoggedIn = useCheckToken();
+  const token = useGetTokenFromLocalStorage();
 
   let [post, setPost] = useState({});
   let [loading, setLoading] = useState(true);
@@ -58,6 +62,7 @@ const ShowOnePost = (props) => {
           body: JSON.stringify(deletedPost),
           headers: {
             "Content-type": "application/json",
+            authorization: token,
           },
         }
       ).then((response) => {
