@@ -1,38 +1,38 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom'
-import { useCheckToken } from '../hooks/customHooks'
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
+import { useCheckToken } from "../hooks/customHooks";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    
-    position: 'relative',
-    zIndex: 1400
+    position: "relative",
+    zIndex: 1400,
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   ["@media (min-width: 1024px)"]: {
     menuButton: {
-        display: 'none'
+      display: "none",
     },
     loginButton: {
-      color: 'white',
-      textDecoration: 'none'    
-    }
+      color: "white",
+      textDecoration: "none",
+    },
   },
   ["@media (max-width: 1024px)"]: {
     loginButton: {
-        display: 'none'
-    }
+      display: "none",
+    },
   },
   title: {
     flexGrow: 1,
@@ -40,10 +40,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TopBar = (props) => {
-
   const classes = useStyles();
 
-  const isLoggedIn = useCheckToken()
+  const isLoggedIn = useSelector((state) => state.sessions.isLoggedIn);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -56,9 +55,9 @@ const TopBar = (props) => {
   };
 
   const handleSignout = () => {
-    localStorage.removeItem('AuthToken')
-    window.location.reload()
-  }
+    localStorage.removeItem("AuthToken");
+    window.location.reload();
+  };
 
   return (
     <div className={classes.root}>
@@ -83,17 +82,19 @@ const TopBar = (props) => {
           <Typography variant="h4" className={classes.title}>
             React Blog
           </Typography>
-          { isLoggedIn ?
-              <Button color="inherit" onClick={handleSignout}>Signout</Button>
-            :
-              <Link to="/login" className={classes.loginButton}>
-                <Button color="inherit">Login</Button>
-              </Link>
-          }
+          {isLoggedIn ? (
+            <Button color="inherit" onClick={handleSignout}>
+              Signout
+            </Button>
+          ) : (
+            <Link to="/login" className={classes.loginButton}>
+              <Button color="inherit">Login</Button>
+            </Link>
+          )}
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
 
-export default TopBar
+export default TopBar;

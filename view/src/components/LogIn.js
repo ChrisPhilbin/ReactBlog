@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { login, startSession } from "../actions/SessionActions";
 
 import axios from "axios";
 
@@ -40,29 +42,36 @@ const styles = (theme) => ({
 });
 
 const LogIn = (props) => {
+  const dispatch = useDispatch();
+
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [errors, setErrors] = useState([]);
-  let [loading, setLoading] = useState(false);
+
+  let loading = useSelector((state) => state.sessions.loading);
+  let errors = useSelector((state) => state.sessions.hasErrors);
+  // let [errors, setErrors] = useState([]);
+  // let [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     const userData = {
       email: email,
       password: password,
     };
-    axios
-      .post(process.env.REACT_APP_CORS + "/login", userData)
-      .then((response) => {
-        localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
-        setLoading(false);
-        window.location.replace("http://localhost:3000");
-      })
-      .catch((error) => {
-        setErrors(error);
-        setLoading(false);
-      });
+    dispatch(startSession());
+    dispatch(login(userData));
+
+    // axios
+    //   .post(process.env.REACT_APP_CORS + "/login", userData)
+    //   .then((response) => {
+    //     localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
+    //     setLoading(false);
+    //     window.location.replace("http://localhost:3000");
+    //   })
+    //   .catch((error) => {
+    //     setErrors(error);
+    //     setLoading(false);
+    //   });
   };
 
   const { classes } = props;
