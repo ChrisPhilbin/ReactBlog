@@ -57,7 +57,7 @@ const LogIn = (props) => {
       .then((response) => {
         localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
         setLoading(false);
-        props.history.push("/");
+        window.location.replace("http://localhost:3000");
       })
       .catch((error) => {
         setErrors(error);
