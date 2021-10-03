@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import Container from "@material-ui/core/Container";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,6 +12,7 @@ import {
   useCheckToken,
   useGetTokenFromLocalStorage,
 } from "../hooks/customHooks";
+import { fetchOnePost } from "../actions/PostActions";
 
 const useStyles = makeStyles({
   postIcons: {
@@ -31,22 +32,25 @@ const useStyles = makeStyles({
 });
 
 const ShowOnePost = (props) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
-  const isLoggedIn = useCheckToken();
+  // const isLoggedIn = useCheckToken();
+  const isLoggedIn = useSelector((state) => state.sessions.isLoggedIn);
   const token = useGetTokenFromLocalStorage();
 
-  let [post, setPost] = useState({});
-  let [loading, setLoading] = useState(true);
+  // let [post, setPost] = useState({});
+  // let [loading, setLoading] = useState(true);
+  let post = useSelector((state) => state.posts.onePost);
+  let loading = useSelector((state) => state.posts.loading);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPost(data);
-        setLoading(false);
-        document.title = post.title;
-      });
+    dispatch(fetchOnePost(props.match.params.postId));
+    // fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setPost(data);
+    //     setLoading(false);
   }, []);
 
   const handleDelete = () => {

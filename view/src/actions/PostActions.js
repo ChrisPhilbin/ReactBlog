@@ -17,13 +17,13 @@ export const getOnePostFailure = () => ({
 
 export const fetchOnePost = (postId) => {
   return async (dispatch) => {
-    dispatch(getPost);
+    dispatch(getPost());
     try {
       const response = await fetch(
         `${process.env.REACT_APP_CORS}/posts/${postId}`
       );
       if (response.ok) {
-        const post = response.json();
+        const post = await response.json();
         dispatch(getOnePostSuccess(post));
       }
     } catch (error) {
@@ -43,7 +43,7 @@ export const getManyPostsFailure = () => ({
 
 export const fetchManyPosts = () => {
   return async (dispatch) => {
-    dispatch(getPost);
+    dispatch(getPost());
     try {
       const response = await fetch(`${process.env.REACT_APP_CORS}/posts`);
       if (response.ok) {
