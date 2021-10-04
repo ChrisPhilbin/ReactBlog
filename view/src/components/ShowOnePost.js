@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "@material-ui/core/Container";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -8,11 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ShowLoading from "./ShowLoading";
-import {
-  useCheckToken,
-  useGetTokenFromLocalStorage,
-} from "../hooks/customHooks";
-import { fetchOnePost } from "../actions/PostActions";
+import { deleteOnePost, fetchOnePost } from "../actions/PostActions";
 
 const useStyles = makeStyles({
   postIcons: {
@@ -35,46 +31,18 @@ const ShowOnePost = (props) => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // const isLoggedIn = useCheckToken();
   const isLoggedIn = useSelector((state) => state.sessions.isLoggedIn);
-  const token = useGetTokenFromLocalStorage();
 
-  // let [post, setPost] = useState({});
-  // let [loading, setLoading] = useState(true);
   let post = useSelector((state) => state.posts.onePost);
   let loading = useSelector((state) => state.posts.loading);
 
   useEffect(() => {
     dispatch(fetchOnePost(props.match.params.postId));
-    // fetch(process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setPost(data);
-    //     setLoading(false);
   }, []);
 
   const handleDelete = () => {
     if (window.confirm("Are you sure?")) {
-      let deletedPost = {
-        postId: props.match.params.postId,
-      };
-
-      fetch(
-        process.env.REACT_APP_CORS + `/posts/${props.match.params.postId}`,
-        {
-          method: "delete",
-          body: JSON.stringify(deletedPost),
-          headers: {
-            "Content-type": "application/json",
-            authorization: token,
-          },
-        }
-      ).then((response) => {
-        if (response.status === 200) {
-          alert("Deleted!");
-          props.history.push("/posts");
-        }
-      });
+      dispatch(deleteOnePost(props.match.params.postId));
     }
   };
 
