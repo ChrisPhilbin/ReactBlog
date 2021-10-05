@@ -59,6 +59,7 @@ const LogIn = (props) => {
       password: password,
     };
     dispatch(login(userData));
+    props.history.push("/");
   };
 
   const { classes } = props;
