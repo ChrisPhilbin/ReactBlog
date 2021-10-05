@@ -16,6 +16,15 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 import { useGetTokenFromLocalStorage } from "../hooks/customHooks";
+import {
+  convertToRaw,
+  convertFromHTML,
+  ContentState,
+  EditorState,
+  convertFromRaw,
+} from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 
 const useStyles = makeStyles({
   postPaper: {
@@ -26,6 +35,7 @@ const useStyles = makeStyles({
 });
 
 const CreateNewPost = (props) => {
+  console.log(props, "props passed in to CreateOrEditPost component");
   const classes = useStyles();
 
   const token = useGetTokenFromLocalStorage();
@@ -63,11 +73,11 @@ const CreateNewPost = (props) => {
         });
     }
   }, []);
-
   const handlePostSubmit = () => {
+    let draftHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
     let newPost = {
       title: post.title,
-      body: post.body,
+      body: draftHTML,
       category: post.category,
     };
     fetch(process.env.REACT_APP_CORS + suffix, {
@@ -113,8 +123,10 @@ const CreateNewPost = (props) => {
 
   const onEditorStateChange = (editorState) => {
     setPost({ ...post, body: editorState });
-    console.log(post.body, "post body");
   };
+
+  // const blocks = convertFromRaw(post.body);
+  // let editorState = EditorState.createWithContent(blocks, null);
 
   let editorState = post.body;
 

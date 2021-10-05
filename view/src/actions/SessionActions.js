@@ -11,7 +11,7 @@ export const sessionStartFailure = () => ({ type: SESSION_START_FAILURE });
 
 export const endSession = () => ({ type: SESSION_END });
 
-export const login = (userData) => {
+export const login = (userData, props) => {
   return async (dispatch) => {
     dispatch(startSession);
     console.log("starting session...");

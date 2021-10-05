@@ -58,20 +58,7 @@ const LogIn = (props) => {
       email: email,
       password: password,
     };
-    dispatch(startSession());
     dispatch(login(userData));
-
-    // axios
-    //   .post(process.env.REACT_APP_CORS + "/login", userData)
-    //   .then((response) => {
-    //     localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
-    //     setLoading(false);
-    //     window.location.replace("http://localhost:3000");
-    //   })
-    //   .catch((error) => {
-    //     setErrors(error);
-    //     setLoading(false);
-    //   });
   };
 
   const { classes } = props;
